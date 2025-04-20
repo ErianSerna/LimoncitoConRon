@@ -46,14 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="1. Presentaciones\Formularios\Bebidas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="1. Presentaciones\Formularios\Bebidas.Designer.cs">
+      <DependentUpon>Bebidas.cs</DependentUpon>
     </Compile>
+    <Compile Include="2. Servicios\Conexion.cs" />
+    <Compile Include="2. Servicios\lib_repositorios\RepositorioBebidas.cs" />
+    <Compile Include="2. Servicios\lib_servicios\ServicioBebidas.cs" />
+    <Compile Include="3.Comunes\lib_entidades\Modelos\BebidasModel.cs" />
+    <Compile Include="3.Comunes\lib_entidades\Modelos\Descuentos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="1. Presentaciones\Formularios\Bebidas.resx">
+      <DependentUpon>Bebidas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -75,6 +83,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controladores\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

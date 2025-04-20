@@ -1,0 +1,10 @@
+C:\Users\erian\source\repos\LimoncitoConRon\obj\Debug\LimoncitoConRon.csproj.AssemblyReference.cache
+C:\Users\erian\source\repos\LimoncitoConRon\obj\Debug\LimoncitoConRon._1._Presentaciones.Formularios.Bebidas.resources
+C:\Users\erian\source\repos\LimoncitoConRon\obj\Debug\LimoncitoConRon.Properties.Resources.resources
+C:\Users\erian\source\repos\LimoncitoConRon\obj\Debug\LimoncitoConRon.csproj.GenerateResource.cache
+C:\Users\erian\source\repos\LimoncitoConRon\obj\Debug\LimoncitoConRon.csproj.CoreCompileInputs.cache
+C:\Users\erian\source\repos\LimoncitoConRon\bin\Debug\LimoncitoConRon.exe.config
+C:\Users\erian\source\repos\LimoncitoConRon\bin\Debug\LimoncitoConRon.exe
+C:\Users\erian\source\repos\LimoncitoConRon\bin\Debug\LimoncitoConRon.pdb
+C:\Users\erian\source\repos\LimoncitoConRon\obj\Debug\LimoncitoConRon.exe
+C:\Users\erian\source\repos\LimoncitoConRon\obj\Debug\LimoncitoConRon.pdb
