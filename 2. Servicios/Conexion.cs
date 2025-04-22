@@ -17,7 +17,8 @@ namespace LimoncitoConRon._2._Servicios
         // Metodo constructor privado: Crea el objeto de conexion
         private Conexion()
         {
-            string connectionString = "server=ERIAN\\DEV;database=Licorera_DB;integrated security=true";
+            //string connectionString = "server=ERIAN\\DEV;database=Licorera_DB;integrated security=true";
+            string connectionString = "server=DESKTOP-D1091LH\\DEV;database=Licorera_DB;integrated security=true";
             conexion = new SqlConnection(connectionString);
             conexion.Open(); // Abrir la conexion
         }

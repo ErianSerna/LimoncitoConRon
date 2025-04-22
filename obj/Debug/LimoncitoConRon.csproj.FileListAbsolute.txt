@@ -8,3 +8,13 @@ C:\Users\erian\source\repos\LimoncitoConRon\bin\Debug\LimoncitoConRon.exe
 C:\Users\erian\source\repos\LimoncitoConRon\bin\Debug\LimoncitoConRon.pdb
 C:\Users\erian\source\repos\LimoncitoConRon\obj\Debug\LimoncitoConRon.exe
 C:\Users\erian\source\repos\LimoncitoConRon\obj\Debug\LimoncitoConRon.pdb
+D:\0-Proyectos-en-C#\WindowsForms\LimoncitoConRon\bin\Debug\LimoncitoConRon.exe.config
+D:\0-Proyectos-en-C#\WindowsForms\LimoncitoConRon\bin\Debug\LimoncitoConRon.exe
+D:\0-Proyectos-en-C#\WindowsForms\LimoncitoConRon\bin\Debug\LimoncitoConRon.pdb
+D:\0-Proyectos-en-C#\WindowsForms\LimoncitoConRon\obj\Debug\LimoncitoConRon.csproj.AssemblyReference.cache
+D:\0-Proyectos-en-C#\WindowsForms\LimoncitoConRon\obj\Debug\LimoncitoConRon._1._Presentaciones.Formularios.Bebidas.resources
+D:\0-Proyectos-en-C#\WindowsForms\LimoncitoConRon\obj\Debug\LimoncitoConRon.Properties.Resources.resources
+D:\0-Proyectos-en-C#\WindowsForms\LimoncitoConRon\obj\Debug\LimoncitoConRon.csproj.GenerateResource.cache
+D:\0-Proyectos-en-C#\WindowsForms\LimoncitoConRon\obj\Debug\LimoncitoConRon.csproj.CoreCompileInputs.cache
+D:\0-Proyectos-en-C#\WindowsForms\LimoncitoConRon\obj\Debug\LimoncitoConRon.exe
+D:\0-Proyectos-en-C#\WindowsForms\LimoncitoConRon\obj\Debug\LimoncitoConRon.pdb

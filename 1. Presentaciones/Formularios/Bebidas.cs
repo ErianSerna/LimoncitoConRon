@@ -49,6 +49,41 @@ namespace LimoncitoConRon._1._Presentaciones.Formularios
             MessageBox.Show("Esta es una alerta del programa", "itulo X");
         }
 
+        private void btnBebidas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCatalogos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFacturas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnReservas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblNombreAdmin_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //private void CargarDatos()
         //{
 
