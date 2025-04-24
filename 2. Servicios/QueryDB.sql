@@ -244,13 +244,6 @@ CREATE TABLE [Bebidas_Catalogos] (
 );
 GO
 
-CREATE PROCEDURE sp_ListarBebidas
-AS
-BEGIN
-    SELECT B.Id, B.Nombre, B.Precio, B.Cantidad_Existente, Tb.Nombre AS Tipo 
-    FROM Bebidas B INNER JOIN TipoBebidas Tb ON B.Id_TipoBebidas = Tb.Id;
-END
-
 EXEC sp_ListarBebidas
 
 SELECT * FROM Descuentos
@@ -260,3 +253,92 @@ SELECT * FROM Bebidas
 INSERT INTO Descuentos (Fecha_inicio,Porcentaje,Fecha_final,Estado,Tipo) VALUES (GETDATE(),0.20,'2025-05-01',1,'Por producto')
 INSERT INTO TipoBebidas (Nombre) VALUES ('Cerveza')
 INSERT INTO Bebidas (Nombre,Precio,Cantidad_Existente,Id_TipoBebidas,Id_Descuentos) VALUES ('Costeñita',7000.00,5,1,1)
+
+
+INSERT INTO TipoBebidas (Nombre)
+VALUES ('RON'),
+	   ('VODKA'),
+	   ('WHISKY'),
+	   ('TEQUILA'),
+	   ('GINEBRA'),
+	   ('BRANDY'),
+	   ('LICOR DE FRUTAS');
+
+UPDATE TipoBebidas 
+SET Nombre = 'CERVEZA' WHERE Id = 1;
+GO;
+
+-- Procedimiento almacenado: sp_GuardarBebida
+CREATE PROCEDURE sp_GuardarBebida 
+	@nombre NVARCHAR(50),
+	@precio DECIMAL(10,2),
+	@cant_exis INT,
+	@id_desc INT,
+	@id_tbebida INT
+AS 
+BEGIN
+	INSERT INTO Bebidas (Nombre, Precio, Cantidad_Existente, Id_Descuentos, Id_TipoBebidas)
+	VALUES (@nombre,@precio,@cant_exis,@id_desc,@id_tbebida);
+END;
+GO;
+
+-- Procedimiento almacenado: sp_ListarTipoBebida
+CREATE PROCEDURE sp_ListarTipoBebida
+AS
+BEGIN
+	SELECT * FROM TipoBebidas;
+END;
+GO;
+EXEC sp_ListarBebidas;
+
+EXEC sp_GuardarBebida 'Tequila mañanero', 85500.00,40, 1, 5;
+EXEC sp_ListarTipoBebida;
+GO
+
+-- Procedimiento almacenado: sp_ListarBebidasTabla
+CREATE PROCEDURE sp_ListarBebidasTabla
+AS
+BEGIN
+    SELECT B.Id, B.Nombre, B.Precio, B.Cantidad_Existente, Tb.Nombre AS Tipo, D.Porcentaje AS Descuento 
+    FROM Bebidas B INNER JOIN TipoBebidas Tb ON B.Id_TipoBebidas = Tb.Id INNER JOIN Descuentos D ON B.Id_Descuentos = D.Id;
+END;
+GO
+
+EXEC sp_ListarBebidasTabla;
+GO
+
+-- Procedimiento almacenado: sp_ListarBebidas
+CREATE PROCEDURE sp_ListarBebidas
+AS
+BEGIN
+    SELECT * FROM Bebidas
+END;
+GO
+
+--Procedimiento almacenado: sp_ListarDescuento
+CREATE PROCEDURE sp_ListarDescuento
+AS
+BEGIN
+	SELECT * FROM Descuentos;
+END;
+GO
+
+
+--Procedimiento almacenado: sp_ListarDescuentoPorTipo
+CREATE PROCEDURE sp_ListarDescuentoPorTipo
+AS
+BEGIN
+	SELECT DISTINCT * FROM Descuentos;
+END;
+GO
+
+EXEC sp_ListarDescuentoPorTipo;
+GO
+
+--Procedimiento almacenado: sp_BorrarBebida
+CREATE PROCEDURE sp_BorrarBebida
+    @Id INT
+AS
+BEGIN
+    DELETE FROM Bebidas WHERE Id = @Id;
+END
