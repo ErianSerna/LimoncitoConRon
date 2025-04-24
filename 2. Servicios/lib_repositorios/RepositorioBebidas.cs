@@ -135,21 +135,36 @@ namespace LimoncitoConRon._2._Servicios.lib_repositorios
         }
 
         //metodo de actualizar 
-        public void Actualizar(BebidasModel bebida)
+        public Dictionary<string, object> Actualizar(BebidasModel bebida)
         {
-            using (SqlCommand cmd = new SqlCommand("sp_ActualizarBebida", _conexion))
+            Dictionary<string, object> resultado = new Dictionary<string, object>();
+            try
             {
-               
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Id", bebida.Id);
-                cmd.Parameters.AddWithValue("@Nombre", bebida.Nombre);
-                cmd.Parameters.AddWithValue("@Precio", bebida.Precio);
-                cmd.Parameters.AddWithValue("@Cantidad_Existente", bebida.Cantidad_Existente);
-                cmd.Parameters.AddWithValue("@Id_Descuentos", bebida.Id_Descuentos);
-                cmd.Parameters.AddWithValue("@Id_TipoBebidas", bebida.Id_TipoBebidas);
+                using (SqlCommand cmd = new SqlCommand("sp_ActualizarBebida", _conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", bebida.Id);
+                    cmd.Parameters.AddWithValue("@Nombre", bebida.Nombre);
+                    cmd.Parameters.AddWithValue("@Precio", bebida.Precio);
+                    cmd.Parameters.AddWithValue("@Cantidad_Existente", bebida.Cantidad_Existente);
+                    cmd.Parameters.AddWithValue("@Id_Descuentos", bebida.Id_Descuentos);
+                    cmd.Parameters.AddWithValue("@Id_TipoBebidas", bebida.Id_TipoBebidas);
 
-                _conexion.Open();
-                cmd.ExecuteNonQuery();
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+
+                    if (filasAfectadas > 0)
+                    {
+                        resultado["estado"] = "success";
+                        resultado["mensaje"] = "La bebida fue actualizada correctamente";
+                    }
+                    return resultado;
+                }
+            }
+            catch (SqlException ex)
+            {
+                resultado["estado"] = "error";
+                resultado["mensaje"] = ex.Message;
+                return resultado;
             }
         }
 

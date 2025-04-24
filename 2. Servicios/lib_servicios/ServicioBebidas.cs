@@ -123,6 +123,67 @@ namespace LimoncitoConRon._2._Servicios.lib_servicios
             return mensaje;
         }
 
+        // Metodo para Actualizar 
+        public string Actualizar(int id, string nombre, double precio, int cantidadExi, string opc_combotb, double opc_combod)
+        {
+            string mensaje = "";
+            // Validar que ningun dato este vacio o nulo
+            if (id <= 0 || nombre.Equals("") || precio <= 0 || cantidadExi <= 0 || tipobebida == null || descuento == null)
+            {
+                return "Los campos no pueden estar vacios";
+            }
+
+            // Validar que el id sea valido 
+            if (id <= 0) // No es valido
+            {
+                mensaje = "El id no es valido";
+            } else // Es valido
+            {
+                // Validar si el id a eliminar existe
+                List<BebidasModel> listab = Repositorio.Listar(); // Llama al listar que retorna una lista, no el que manda un Datatable
+                BebidasModel bebida = listab.FirstOrDefault(b => b.Id == id); // Buscar si el elemento esta dentro de la lista
+
+                if (bebida == null)
+                {
+                    mensaje = "El id no existe";
+                } else
+                {
+                    // Buscar y obtener el id del opc_combotd
+                    List<TipoBebidasModel> listatb = RepositorioTipoBebidas.Listar();
+                    TipoBebidasModel tipobebida = listatb.FirstOrDefault(tb => tb.Nombre == opc_combotb); // Buscar si el elemento esta dentro de la lista
+
+                    // Buscar y obtener el id del opc_combod
+                    List<DescuentosModel> listad = RepositorioDescuentos.Listar();
+                    DescuentosModel descuento = listad.FirstOrDefault(d => d.Porcentaje == opc_combod); // Buscar si el elemento esta dentro de la lista
+                    // Obtener el id de tipoBebida y id de descuentos
+                    int id_TipoBebida = tipobebida.Id;
+                    int id_Descuentos = descuento.Id;
+                }
+
+
+
+            }
+
+            
+
+            
+
+            BebidasModel objBebida = new BebidasModel()
+            {
+                Nombre = nombre,
+                Precio = precio,
+                Cantidad_Existente = cantidadExi,
+                Id_TipoBebidas = id_TipoBebida,
+                Id_Descuentos = id_Descuentos
+            };
+
+            Dictionary<string, Object> resultado = Repositorio.Guardar(objBebida);
+
+            // Valido si la respuesta fue correcta o no
+            mensaje = resultado["estado"].ToString() == "success" ? resultado["mensaje"].ToString() : "Ocurrio un error al insertar la bebida: " + (resultado["mensaje"].ToString());
+            return mensaje;
+        }
+
         // Metodo de Eliminar
         public string Eliminar(int id)
         {

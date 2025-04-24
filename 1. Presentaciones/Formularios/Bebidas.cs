@@ -149,10 +149,11 @@ namespace LimoncitoConRon._1._Presentaciones.Formularios
                         double precio = Convert.ToDouble(dgvBebidas.Rows[e.RowIndex].Cells["Precio"].Value);
                         int cantidad = Convert.ToInt32(dgvBebidas.Rows[e.RowIndex].Cells["Cantidad_Existente"].Value);
                         string opc_combotd = dgvBebidas.Rows[e.RowIndex].Cells["Tipo"].Value.ToString();
-                        string opc_combod = dgvBebidas.Rows[e.RowIndex].Cells["Descuentos"].Value.ToString();                                                                                   
+                        string opc_combod = dgvBebidas.Rows[e.RowIndex].Cells["Descuento"].Value.ToString();                                                                                   
 
                         // Lógica para actualizar con el servicio
                         MessageBox.Show($"Actualizando bebida {id} con nuevo nombre: {nombre}\nprecio: {precio}\ncantidad: {cantidad}\ntipo: {opc_combotd}\ndescuentos: {opc_combod}");
+
 
                         // Restaurar botones y bloquear edición
                         dgvBebidas.ReadOnly = true;

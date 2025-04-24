@@ -36,6 +36,8 @@
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.dgvBebidas = new System.Windows.Forms.DataGridView();
             this.pannelInsertar = new System.Windows.Forms.Panel();
+            this.comboDescuento = new System.Windows.Forms.ComboBox();
+            this.lblDescuento = new System.Windows.Forms.Label();
             this.comboTipoBebida = new System.Windows.Forms.ComboBox();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.txtCantidad = new System.Windows.Forms.TextBox();
@@ -55,8 +57,6 @@
             this.comboPaginacion = new System.Windows.Forms.ComboBox();
             this.txtNro = new System.Windows.Forms.TextBox();
             this.lblNro = new System.Windows.Forms.Label();
-            this.lblDescuento = new System.Windows.Forms.Label();
-            this.comboDescuento = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBebidas)).BeginInit();
             this.pannelInsertar.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -196,6 +196,25 @@
             this.pannelInsertar.Name = "pannelInsertar";
             this.pannelInsertar.Size = new System.Drawing.Size(750, 100);
             this.pannelInsertar.TabIndex = 7;
+            // 
+            // comboDescuento
+            // 
+            this.comboDescuento.FormattingEnabled = true;
+            this.comboDescuento.Location = new System.Drawing.Point(566, 22);
+            this.comboDescuento.Name = "comboDescuento";
+            this.comboDescuento.Size = new System.Drawing.Size(161, 21);
+            this.comboDescuento.TabIndex = 13;
+            // 
+            // lblDescuento
+            // 
+            this.lblDescuento.AutoSize = true;
+            this.lblDescuento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescuento.ForeColor = System.Drawing.Color.White;
+            this.lblDescuento.Location = new System.Drawing.Point(484, 21);
+            this.lblDescuento.Name = "lblDescuento";
+            this.lblDescuento.Size = new System.Drawing.Size(75, 16);
+            this.lblDescuento.TabIndex = 12;
+            this.lblDescuento.Text = "Descuento:";
             // 
             // comboTipoBebida
             // 
@@ -396,25 +415,6 @@
             this.lblNro.TabIndex = 0;
             this.lblNro.Text = "Nro:";
             // 
-            // lblDescuento
-            // 
-            this.lblDescuento.AutoSize = true;
-            this.lblDescuento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescuento.ForeColor = System.Drawing.Color.White;
-            this.lblDescuento.Location = new System.Drawing.Point(484, 21);
-            this.lblDescuento.Name = "lblDescuento";
-            this.lblDescuento.Size = new System.Drawing.Size(75, 16);
-            this.lblDescuento.TabIndex = 12;
-            this.lblDescuento.Text = "Descuento:";
-            // 
-            // comboDescuento
-            // 
-            this.comboDescuento.FormattingEnabled = true;
-            this.comboDescuento.Location = new System.Drawing.Point(566, 22);
-            this.comboDescuento.Name = "comboDescuento";
-            this.comboDescuento.Size = new System.Drawing.Size(161, 21);
-            this.comboDescuento.TabIndex = 13;
-            // 
             // Bebidas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -435,9 +435,8 @@
             this.Controls.Add(this.btnUsuarios);
             this.Controls.Add(this.btnBebidas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Bebidas";
-            this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Bebidas_Load);
