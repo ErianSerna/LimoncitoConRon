@@ -50,11 +50,11 @@ namespace LimoncitoConRon._2._Servicios.lib_repositorios
         //    return lista;
         //}//fin de metodo
 
-        public DataTable Listar()
+        public DataTable ListarDataTable()
         {
             // Crear el dataTable que el adaptador va a llenar con los datos resultantes de la consulta
             DataTable dt = new DataTable();
-            var consulta = "sp_ListarBebidas";
+            var consulta = "sp_ListarBebidasTabla";
             using (SqlCommand cmd = new SqlCommand(consulta, _conexion))
             {
                 cmd.CommandType = CommandType.StoredProcedure; // Especificar el tipo de comando
@@ -67,6 +67,38 @@ namespace LimoncitoConRon._2._Servicios.lib_repositorios
 
             // Retornar el dataTable
             return dt;
+        }
+
+        // Metodo para listar las bebidas
+        public List<BebidasModel> Listar()
+        {
+            //se crea una lista de Bebidas
+            List<BebidasModel> lista = new List<BebidasModel>();
+
+            //se ejecuta el sp llamado sp_ListarBebidas
+            using (SqlCommand cmd = new SqlCommand("sp_ListarBebidas", _conexion))
+            {
+                //Indicar que el comando es un procedimiento almacenado
+                cmd.CommandType = CommandType.StoredProcedure;
+                //lee las filas 
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    //bucle para leer las filas 
+                    while (reader.Read())
+                    {
+                        lista.Add(new BebidasModel
+                        {
+                            Id = reader.GetInt32(0),
+                            Nombre = reader.GetString(1),
+                            Precio = Convert.ToDouble(reader.GetDecimal(2)),
+                            Cantidad_Existente = reader.GetInt32(3),
+                            Id_TipoBebidas = reader.GetInt32(4),
+                            Id_Descuentos = reader.GetInt32(5)
+                        });
+                    }
+                }
+            }
+            return lista;
         }
 
         //metodo de guardar
@@ -122,14 +154,31 @@ namespace LimoncitoConRon._2._Servicios.lib_repositorios
         }
 
         //metodo de Eliminar
-        public void Borrar(int id)
+        public Dictionary<string, object> Borrar(int id)
         {
-            using (SqlCommand cmd = new SqlCommand("sp_BorrarBebida", _conexion))
+            Dictionary<string, object> resultado = new Dictionary<string, object>();
+            try
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Id", id);
+                using (SqlCommand cmd = new SqlCommand("sp_BorrarBebida", _conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", id);
 
-                cmd.ExecuteNonQuery();
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+
+                    if (filasAfectadas > 0)
+                    {
+                        resultado["estado"] = "success";
+                        resultado["mensaje"] = "La bebida fue eliminada correctamente";
+                    }
+                    return resultado;
+                }
+            }
+            catch (SqlException ex)
+            {
+                resultado["estado"] = "error";
+                resultado["mensaje"] = ex.Message;
+                return resultado;
             }
         }
 

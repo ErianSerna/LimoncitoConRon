@@ -308,7 +308,7 @@
             // 
             this.lblBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBuscar.ForeColor = System.Drawing.Color.White;
-            this.lblBuscar.Location = new System.Drawing.Point(289, 85);
+            this.lblBuscar.Location = new System.Drawing.Point(289, 68);
             this.lblBuscar.Name = "lblBuscar";
             this.lblBuscar.Size = new System.Drawing.Size(83, 28);
             this.lblBuscar.TabIndex = 8;
@@ -316,7 +316,7 @@
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(407, 87);
+            this.txtBuscar.Location = new System.Drawing.Point(407, 70);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(353, 20);
             this.txtBuscar.TabIndex = 8;
@@ -421,7 +421,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
             this.ClientSize = new System.Drawing.Size(1008, 684);
-            this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.lblBuscar);
@@ -437,7 +436,6 @@
             this.Controls.Add(this.btnBebidas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Bebidas";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

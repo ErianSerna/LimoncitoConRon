@@ -27,7 +27,7 @@ namespace LimoncitoConRon._2._Servicios.lib_servicios
         public void Listar(DataGridView dgvBebidas)
         {
             // Verificar si la lista esta vacia
-            DataTable dt = Repositorio.Listar();
+            DataTable dt = Repositorio.ListarDataTable();
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -38,11 +38,44 @@ namespace LimoncitoConRon._2._Servicios.lib_servicios
                 dgvBebidas.Columns["Precio"].Width = 100;
                 dgvBebidas.Columns["Cantidad_Existente"].Width = 110;
                 dgvBebidas.Columns["Tipo"].Width = 110;
+                dgvBebidas.Columns["Descuento"].Width = 110;
 
                 // Centrar los encabezados del DataGridView
                 foreach (DataGridViewColumn col in dgvBebidas.Columns)
                 {
                     col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                }
+
+                // Agregar boton de actualizar/modificar
+                if (!dgvBebidas.Columns.Contains("Editar"))
+                {
+                    DataGridViewButtonColumn btnEditar = new DataGridViewButtonColumn();
+                    btnEditar.Name = "Editar";
+                    btnEditar.HeaderText = "Editar";
+                    btnEditar.Text = "Editar";
+                    btnEditar.UseColumnTextForButtonValue = false; // para que el texto del boton sea el mismo que el del encabezado
+                    btnEditar.Width = 80;
+                    dgvBebidas.Columns.Add(btnEditar);
+                }
+                
+
+                // Agregar boton eliminar/inhabilitar
+                if (!dgvBebidas.Columns.Contains("Eliminar"))
+                {
+                    DataGridViewButtonColumn btnEliminar = new DataGridViewButtonColumn();
+                    btnEliminar.Name = "Eliminar";
+                    btnEliminar.HeaderText = "Eliminar";
+                    btnEliminar.Text = "Eliminar";
+                    btnEliminar.UseColumnTextForButtonValue = false; // para que el texto del boton sea el mismo que el del encabezado
+                    btnEliminar.Width = 80;
+                    dgvBebidas.Columns.Add(btnEliminar);
+                }
+
+                // Asignar el texto inicial a los botones (solo si se usa UseColumnTextForButtonValue = false)
+                foreach (DataGridViewRow fila in dgvBebidas.Rows)
+                {
+                    fila.Cells["Editar"].Value = "Editar";
+                    fila.Cells["Eliminar"].Value = "Eliminar";
                 }
             }
             else
@@ -89,5 +122,34 @@ namespace LimoncitoConRon._2._Servicios.lib_servicios
             mensaje = resultado["estado"].ToString() == "success" ? resultado["mensaje"].ToString() : "Ocurrio un error al insertar la bebida: " + (resultado["mensaje"].ToString());
             return mensaje;
         }
+
+        // Metodo de Eliminar
+        public string Eliminar(int id)
+        {
+            string mensaje = "";
+
+            // Validar si el id es valido
+            if (id <= 0) // No es valido
+            {
+                mensaje ="El id no es valido";
+            }
+            else // Es valido
+            {
+                // Validar si el id a eliminar existe
+                List<BebidasModel> listab = Repositorio.Listar(); // Llama al listar que retorna una lista, no el que manda un Datatable
+                BebidasModel bebida = listab.FirstOrDefault(b => b.Id == id); // Buscar si el elemento esta dentro de la lista
+
+                if (bebida == null)
+                {
+                    mensaje = "El id no existe";
+                }
+                Dictionary<string, Object> resultado = Repositorio.Borrar(id);
+                // Valido si la respuesta fue correcta o no
+                mensaje = resultado["estado"].ToString() == "success" ? resultado["mensaje"].ToString() : "Ocurrio un error al eliminar la bebida: " + (resultado["mensaje"].ToString());
+            }
+
+            return mensaje;
+        }
+
     }
 }

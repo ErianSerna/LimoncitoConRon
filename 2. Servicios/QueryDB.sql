@@ -289,16 +289,29 @@ BEGIN
 	SELECT * FROM TipoBebidas;
 END;
 GO;
+EXEC sp_ListarBebidas;
 
 EXEC sp_GuardarBebida 'Tequila mañanero', 85500.00,40, 1, 5;
 EXEC sp_ListarTipoBebida;
+GO
+
+-- Procedimiento almacenado: sp_ListarBebidasTabla
+CREATE PROCEDURE sp_ListarBebidasTabla
+AS
+BEGIN
+    SELECT B.Id, B.Nombre, B.Precio, B.Cantidad_Existente, Tb.Nombre AS Tipo, D.Porcentaje AS Descuento 
+    FROM Bebidas B INNER JOIN TipoBebidas Tb ON B.Id_TipoBebidas = Tb.Id INNER JOIN Descuentos D ON B.Id_Descuentos = D.Id;
+END;
+GO
+
+EXEC sp_ListarBebidasTabla;
+GO
 
 -- Procedimiento almacenado: sp_ListarBebidas
 CREATE PROCEDURE sp_ListarBebidas
 AS
 BEGIN
-    SELECT B.Id, B.Nombre, B.Precio, B.Cantidad_Existente, Tb.Nombre AS Tipo 
-    FROM Bebidas B INNER JOIN TipoBebidas Tb ON B.Id_TipoBebidas = Tb.Id;
+    SELECT * FROM Bebidas
 END;
 GO
 
@@ -310,6 +323,7 @@ BEGIN
 END;
 GO
 
+
 --Procedimiento almacenado: sp_ListarDescuentoPorTipo
 CREATE PROCEDURE sp_ListarDescuentoPorTipo
 AS
@@ -320,3 +334,11 @@ GO
 
 EXEC sp_ListarDescuentoPorTipo;
 GO
+
+--Procedimiento almacenado: sp_BorrarBebida
+CREATE PROCEDURE sp_BorrarBebida
+    @Id INT
+AS
+BEGIN
+    DELETE FROM Bebidas WHERE Id = @Id;
+END

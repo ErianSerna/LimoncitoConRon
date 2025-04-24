@@ -14,6 +14,8 @@ namespace LimoncitoConRon._1._Presentaciones.Formularios
         private ServicioBebidas _serviciobebidas;
         private ServicioTipoBebidas _serviciotipobebidas;
         private ServicioDescuentos _serviciodescuentos;
+        private int filaEnEdicion = -1; // Variable para almacenar la fila en edición (Metodo editar)
+        private Dictionary<string, Object> datosOriginales = new Dictionary<string, object>(); // Diccionario para almacenar los datos originales de la fila en edición
 
         public Bebidas(ServicioBebidas servicioBebidas, ServicioTipoBebidas serviciotipobebidas, ServicioDescuentos serviciodescuentos)
         {
@@ -35,6 +37,7 @@ namespace LimoncitoConRon._1._Presentaciones.Formularios
   
             //Los métodos que se llamen aqui, se van a ejecutar cuando cargué la ventanita
             CambiarLabels();
+            dgvBebidas.CellClick += dgvBebidas_CellClick;
             _serviciobebidas.Listar(dgvBebidas); // Para llenar la tabla de bebidas
             //CargarDatos();
             //Aca hay que poner la logica para cargar los datos de las bebidas (llenar el DataGridView [la tabla])
@@ -103,6 +106,92 @@ namespace LimoncitoConRon._1._Presentaciones.Formularios
 
             _serviciobebidas.Listar(dgvBebidas); // Para actualizar la tabla de bebidas
         }
+
+        private void dgvBebidas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {            
+            /// Verificar que el id del elemento sea mayor a 0 y se le dio clic a un boton
+            if (e.RowIndex >= 0 && dgvBebidas.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+            {
+                string nombreBoton = dgvBebidas.Columns[e.ColumnIndex].Name;
+                //MessageBox.Show("Nombre de la columna: " + nombreBoton);
+
+                //Verificar si la persona sigue en la misma fila o quiere cambiar
+                if (filaEnEdicion != -1 && (e.RowIndex != filaEnEdicion))
+                {
+                    MessageBox.Show("Debe terminar de editar la fila actual antes de pasar a otra");
+                    return;
+                }
+
+                if (nombreBoton == "Editar")
+                {
+                    var celda = dgvBebidas.Rows[e.RowIndex].Cells["Editar"];
+                    if (celda.Value.ToString() == "Editar")
+                    {
+                        // Se guardan los valores antes de ser editados
+                        datosOriginales.Clear();
+                        foreach (DataGridViewCell cell in dgvBebidas.Rows[e.RowIndex].Cells)
+                        {
+                            if (cell.OwningColumn.Name != "Id" && !(cell is DataGridViewButtonCell))
+                                datosOriginales[cell.OwningColumn.Name] = cell.Value;
+                        }
+
+                        // Activar la edición
+                        dgvBebidas.ReadOnly = false;
+                        dgvBebidas.Rows[e.RowIndex].Cells["Id"].ReadOnly = true;
+
+                        celda.Value = "Confirmar";
+                        dgvBebidas.Rows[e.RowIndex].Cells["Eliminar"].Value = "Cancelar";
+                        filaEnEdicion = e.RowIndex;
+                    } else
+                    {
+                        int id = Convert.ToInt32(dgvBebidas.Rows[e.RowIndex].Cells["Id"].Value);
+                        string nombre = dgvBebidas.Rows[e.RowIndex].Cells["Nombre"].Value.ToString();
+                        double precio = Convert.ToDouble(dgvBebidas.Rows[e.RowIndex].Cells["Precio"].Value);
+                        int cantidad = Convert.ToInt32(dgvBebidas.Rows[e.RowIndex].Cells["Cantidad_Existente"].Value);
+                        string opc_combotd = dgvBebidas.Rows[e.RowIndex].Cells["Tipo"].Value.ToString();
+                        string opc_combod = dgvBebidas.Rows[e.RowIndex].Cells["Descuentos"].Value.ToString();                                                                                   
+
+                        // Lógica para actualizar con el servicio
+                        MessageBox.Show($"Actualizando bebida {id} con nuevo nombre: {nombre}\nprecio: {precio}\ncantidad: {cantidad}\ntipo: {opc_combotd}\ndescuentos: {opc_combod}");
+
+                        // Restaurar botones y bloquear edición
+                        dgvBebidas.ReadOnly = true;
+                        dgvBebidas.Rows[e.RowIndex].Cells["Editar"].Value = "Editar";
+                        dgvBebidas.Rows[e.RowIndex].Cells["Eliminar"].Value = "Eliminar";
+                        filaEnEdicion = -1;
+                    }  
+                }
+                else if (nombreBoton == "Eliminar")
+                {
+                    var celda = dgvBebidas.Rows[e.RowIndex].Cells["Eliminar"];
+                    if (celda.Value.ToString() == "Cancelar")
+                    {
+                        // Restaurar valores originales
+                        foreach (var entrada in datosOriginales)
+                        {
+                            dgvBebidas.Rows[e.RowIndex].Cells[entrada.Key].Value = entrada.Value;
+                        }
+
+                        // Restaurar estado
+                        dgvBebidas.ReadOnly = true;
+                        dgvBebidas.Rows[e.RowIndex].Cells["Editar"].Value = "Editar";
+                        dgvBebidas.Rows[e.RowIndex].Cells["Eliminar"].Value = "Eliminar";
+                        filaEnEdicion = -1;
+                    }
+                    else
+                    {
+                        int id = Convert.ToInt32(dgvBebidas.Rows[e.RowIndex].Cells["Id"].Value);
+                        MessageBox.Show($"Eliminar bebida con ID: {id}");
+
+                        // Mandar los datos al servicio para ser validados
+                        string respuesta = _serviciobebidas.Eliminar(id);
+                        MessageBox.Show(respuesta);
+                        _serviciobebidas.Listar(dgvBebidas); // Para actualizar la tabla de bebidas
+                    }
+                }
+            } 
+        }
+
 
         private void btnBebidas_Click(object sender, EventArgs e)
         {
