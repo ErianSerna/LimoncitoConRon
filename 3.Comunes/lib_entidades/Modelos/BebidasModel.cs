@@ -18,7 +18,7 @@ namespace LimoncitoConRon._3.Comunes.lib_entidades.Modelos
         public int Id_TipoBebidas { get; set; }
 
         // Creacion de objetos
-        public Descuentos _Descuentos  { get; set; } // Objeto de descuentos falta mirar lo de los "?" para los nulos
+        public DescuentosModel _Descuentos  { get; set; } // Objeto de descuentos falta mirar lo de los "?" para los nulos
 
     }
 }

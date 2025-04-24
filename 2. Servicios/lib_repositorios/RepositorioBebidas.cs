@@ -70,18 +70,35 @@ namespace LimoncitoConRon._2._Servicios.lib_repositorios
         }
 
         //metodo de guardar
-        public void Guardar(BebidasModel bebida)
+        public Dictionary<string, object> Guardar(BebidasModel bebida)
         {
-            using (SqlCommand cmd = new SqlCommand("sp_GuardarBebida", _conexion))
+            Dictionary<string, object> resultado = new Dictionary<string, object>();
+            try
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Id", bebida.Id);
-                cmd.Parameters.AddWithValue("@Nombre", bebida.Nombre);
-                cmd.Parameters.AddWithValue("@Precio", bebida.Precio);
-                cmd.Parameters.AddWithValue("@Cantidad_Existente", bebida.Cantidad_Existente);
-                cmd.Parameters.AddWithValue("@Id_Descuentos", bebida.Id_Descuentos);
-                cmd.Parameters.AddWithValue("@Id_TipoBebidas", bebida.Id_TipoBebidas);
-                cmd.ExecuteNonQuery();
+                using (SqlCommand cmd = new SqlCommand("sp_GuardarBebida", _conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@nombre", bebida.Nombre);
+                    cmd.Parameters.AddWithValue("@precio", bebida.Precio);
+                    cmd.Parameters.AddWithValue("@cant_exis", bebida.Cantidad_Existente);
+                    cmd.Parameters.AddWithValue("@id_desc", bebida.Id_Descuentos);
+                    cmd.Parameters.AddWithValue("@id_tbebida", bebida.Id_TipoBebidas);
+
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    
+                    if (filasAfectadas > 0)
+                    {
+                        resultado["estado"] = "success";
+                        resultado["mensaje"] = "La bebida fue insertada correctamente";
+                    }
+                    return resultado;
+                }
+            }
+            catch (SqlException ex)
+            {
+                resultado["estado"] = "error";
+                resultado["mensaje"] = ex.Message;
+                return resultado;
             }
         }
 

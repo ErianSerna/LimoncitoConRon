@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -53,10 +53,15 @@
       <DependentUpon>Bebidas.cs</DependentUpon>
     </Compile>
     <Compile Include="2. Servicios\Conexion.cs" />
+    <Compile Include="2. Servicios\lib_repositorios\RepositorioDescuentos.cs" />
+    <Compile Include="2. Servicios\lib_repositorios\RepositorioTipoBebidas.cs" />
     <Compile Include="2. Servicios\lib_repositorios\RepositorioBebidas.cs" />
+    <Compile Include="2. Servicios\lib_servicios\ServicioDescuentos.cs" />
+    <Compile Include="2. Servicios\lib_servicios\ServicioTipoBebidas.cs" />
     <Compile Include="2. Servicios\lib_servicios\ServicioBebidas.cs" />
+    <Compile Include="3.Comunes\lib_entidades\Modelos\DescuentosModel.cs" />
+    <Compile Include="3.Comunes\lib_entidades\Modelos\TipoBebidasModel.cs" />
     <Compile Include="3.Comunes\lib_entidades\Modelos\BebidasModel.cs" />
-    <Compile Include="3.Comunes\lib_entidades\Modelos\Descuentos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="1. Presentaciones\Formularios\Bebidas.resx">

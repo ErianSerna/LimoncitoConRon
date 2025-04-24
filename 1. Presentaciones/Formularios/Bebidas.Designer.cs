@@ -36,7 +36,7 @@
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.dgvBebidas = new System.Windows.Forms.DataGridView();
             this.pannelInsertar = new System.Windows.Forms.Panel();
-            this.txtTipo = new System.Windows.Forms.TextBox();
+            this.comboTipoBebida = new System.Windows.Forms.ComboBox();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -55,6 +55,8 @@
             this.comboPaginacion = new System.Windows.Forms.ComboBox();
             this.txtNro = new System.Windows.Forms.TextBox();
             this.lblNro = new System.Windows.Forms.Label();
+            this.lblDescuento = new System.Windows.Forms.Label();
+            this.comboDescuento = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBebidas)).BeginInit();
             this.pannelInsertar.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -168,7 +170,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvBebidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBebidas.Location = new System.Drawing.Point(223, 235);
+            this.dgvBebidas.Location = new System.Drawing.Point(196, 228);
             this.dgvBebidas.Name = "dgvBebidas";
             this.dgvBebidas.Size = new System.Drawing.Size(620, 316);
             this.dgvBebidas.TabIndex = 6;
@@ -179,7 +181,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pannelInsertar.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.pannelInsertar.Controls.Add(this.txtTipo);
+            this.pannelInsertar.Controls.Add(this.comboDescuento);
+            this.pannelInsertar.Controls.Add(this.lblDescuento);
+            this.pannelInsertar.Controls.Add(this.comboTipoBebida);
             this.pannelInsertar.Controls.Add(this.txtPrecio);
             this.pannelInsertar.Controls.Add(this.txtCantidad);
             this.pannelInsertar.Controls.Add(this.txtNombre);
@@ -187,22 +191,24 @@
             this.pannelInsertar.Controls.Add(this.lblPrecio);
             this.pannelInsertar.Controls.Add(this.lblCantidad);
             this.pannelInsertar.Controls.Add(this.lblNombre);
-            this.pannelInsertar.Location = new System.Drawing.Point(223, 125);
+            this.pannelInsertar.Location = new System.Drawing.Point(196, 113);
             this.pannelInsertar.Margin = new System.Windows.Forms.Padding(0);
             this.pannelInsertar.Name = "pannelInsertar";
-            this.pannelInsertar.Size = new System.Drawing.Size(552, 100);
+            this.pannelInsertar.Size = new System.Drawing.Size(750, 100);
             this.pannelInsertar.TabIndex = 7;
             // 
-            // txtTipo
+            // comboTipoBebida
             // 
-            this.txtTipo.Location = new System.Drawing.Point(373, 63);
-            this.txtTipo.Name = "txtTipo";
-            this.txtTipo.Size = new System.Drawing.Size(161, 20);
-            this.txtTipo.TabIndex = 7;
+            this.comboTipoBebida.FormattingEnabled = true;
+            this.comboTipoBebida.Location = new System.Drawing.Point(306, 61);
+            this.comboTipoBebida.Name = "comboTipoBebida";
+            this.comboTipoBebida.Size = new System.Drawing.Size(161, 21);
+            this.comboTipoBebida.TabIndex = 11;
+            this.comboTipoBebida.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(373, 19);
+            this.txtPrecio.Location = new System.Drawing.Point(306, 18);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(161, 20);
             this.txtPrecio.TabIndex = 6;
@@ -220,13 +226,14 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(161, 20);
             this.txtNombre.TabIndex = 4;
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
             // lblTipo
             // 
             this.lblTipo.AutoSize = true;
             this.lblTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTipo.ForeColor = System.Drawing.Color.White;
-            this.lblTipo.Location = new System.Drawing.Point(298, 63);
+            this.lblTipo.Location = new System.Drawing.Point(248, 62);
             this.lblTipo.Name = "lblTipo";
             this.lblTipo.Size = new System.Drawing.Size(40, 17);
             this.lblTipo.TabIndex = 3;
@@ -237,7 +244,7 @@
             this.lblPrecio.AutoSize = true;
             this.lblPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrecio.ForeColor = System.Drawing.Color.White;
-            this.lblPrecio.Location = new System.Drawing.Point(298, 22);
+            this.lblPrecio.Location = new System.Drawing.Point(248, 21);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(52, 17);
             this.lblPrecio.TabIndex = 2;
@@ -286,12 +293,12 @@
             this.btnInsertar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnInsertar.FlatAppearance.BorderSize = 0;
             this.btnInsertar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInsertar.Font = new System.Drawing.Font("Ebrima", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInsertar.Font = new System.Drawing.Font("Ebrima", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInsertar.ForeColor = System.Drawing.Color.White;
-            this.btnInsertar.Location = new System.Drawing.Point(790, 145);
+            this.btnInsertar.Location = new System.Drawing.Point(829, 228);
             this.btnInsertar.Margin = new System.Windows.Forms.Padding(0);
             this.btnInsertar.Name = "btnInsertar";
-            this.btnInsertar.Size = new System.Drawing.Size(128, 44);
+            this.btnInsertar.Size = new System.Drawing.Size(117, 44);
             this.btnInsertar.TabIndex = 9;
             this.btnInsertar.Text = "Insertar";
             this.btnInsertar.UseVisualStyleBackColor = false;
@@ -325,7 +332,7 @@
             this.panel1.Controls.Add(this.comboPaginacion);
             this.panel1.Controls.Add(this.txtNro);
             this.panel1.Controls.Add(this.lblNro);
-            this.panel1.Location = new System.Drawing.Point(256, 566);
+            this.panel1.Location = new System.Drawing.Point(240, 550);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(519, 39);
             this.panel1.TabIndex = 10;
@@ -389,6 +396,25 @@
             this.lblNro.TabIndex = 0;
             this.lblNro.Text = "Nro:";
             // 
+            // lblDescuento
+            // 
+            this.lblDescuento.AutoSize = true;
+            this.lblDescuento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescuento.ForeColor = System.Drawing.Color.White;
+            this.lblDescuento.Location = new System.Drawing.Point(484, 21);
+            this.lblDescuento.Name = "lblDescuento";
+            this.lblDescuento.Size = new System.Drawing.Size(75, 16);
+            this.lblDescuento.TabIndex = 12;
+            this.lblDescuento.Text = "Descuento:";
+            // 
+            // comboDescuento
+            // 
+            this.comboDescuento.FormattingEnabled = true;
+            this.comboDescuento.Location = new System.Drawing.Point(566, 22);
+            this.comboDescuento.Name = "comboDescuento";
+            this.comboDescuento.Size = new System.Drawing.Size(161, 21);
+            this.comboDescuento.TabIndex = 13;
+            // 
             // Bebidas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,7 +469,6 @@
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblNombreAdmin;
         private System.Windows.Forms.Button btnInsertar;
-        private System.Windows.Forms.TextBox txtTipo;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.TextBox txtNombre;
@@ -456,5 +481,8 @@
         private System.Windows.Forms.ComboBox comboPaginacion;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label lblde;
+        private System.Windows.Forms.ComboBox comboTipoBebida;
+        private System.Windows.Forms.Label lblDescuento;
+        private System.Windows.Forms.ComboBox comboDescuento;
     }
 }
