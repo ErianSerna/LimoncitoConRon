@@ -244,7 +244,6 @@ CREATE TABLE [Bebidas_Catalogos] (
 );
 GO
 
-EXEC sp_ListarBebidas
 
 SELECT * FROM Descuentos
 SELECT * FROM TipoBebidas
@@ -266,7 +265,7 @@ VALUES ('RON'),
 
 UPDATE TipoBebidas 
 SET Nombre = 'CERVEZA' WHERE Id = 1;
-GO;
+GO
 
 -- Procedimiento almacenado: sp_GuardarBebida
 CREATE PROCEDURE sp_GuardarBebida 
@@ -280,7 +279,7 @@ BEGIN
 	INSERT INTO Bebidas (Nombre, Precio, Cantidad_Existente, Id_Descuentos, Id_TipoBebidas)
 	VALUES (@nombre,@precio,@cant_exis,@id_desc,@id_tbebida);
 END;
-GO;
+GO
 
 -- Procedimiento almacenado: sp_ListarTipoBebida
 CREATE PROCEDURE sp_ListarTipoBebida
@@ -288,8 +287,7 @@ AS
 BEGIN
 	SELECT * FROM TipoBebidas;
 END;
-GO;
-EXEC sp_ListarBebidas;
+GO
 
 EXEC sp_GuardarBebida 'Tequila mañanero', 85500.00,40, 1, 5;
 EXEC sp_ListarTipoBebida;
@@ -342,3 +340,31 @@ AS
 BEGIN
     DELETE FROM Bebidas WHERE Id = @Id;
 END
+GO
+
+-- Procedimiento almacenado: sp_ActualizarBebida
+CREATE PROCEDURE sp_ActualizarBebida
+    @Id INT,
+	@Nombre NVARCHAR(50),
+	@Precio DECIMAL(10,2),
+	@Cantidad_Existente INT,
+	@Id_Descuentos INT,
+	@Id_TipoBebidas INT
+AS 
+BEGIN
+	UPDATE Bebidas 
+	SET Nombre = @Nombre, Precio = @Precio, Cantidad_Existente = @Cantidad_Existente, Id_Descuentos = @Id_Descuentos, Id_TipoBebidas = @Id_TipoBebidas
+	WHERE Id = @Id;
+END
+
+-- Procedimiento almacenado: sp_ConsultarPorId
+CREATE PROCEDURE sp_ConsultarPorId
+    @Id INT
+AS
+BEGIN
+    SELECT * FROM Bebidas WHERE Id = @Id
+END
+GO
+
+EXEC sp_ListarBebidas
+EXEC sp_ConsultarPorId 2

@@ -18,7 +18,8 @@ namespace LimoncitoConRon._2._Servicios
         private Conexion()
         {
             //string connectionString = "server=ERIAN\\DEV;database=Licorera_DB;integrated security=true";
-            string connectionString = "server=DESKTOP-D1091LH\\DEV;database=Licorera_DB;integrated security=true";
+            //string connectionString = "server=DESKTOP-D1091LH\\DEV;database=Licorera_DB;integrated security=true";
+            string connectionString = "server=ASUS_ISA\\DEV;database=Licorera_DB;integrated security=true";
             conexion = new SqlConnection(connectionString);
             conexion.Open(); // Abrir la conexion
         }

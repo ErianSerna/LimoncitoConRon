@@ -149,10 +149,11 @@ namespace LimoncitoConRon._1._Presentaciones.Formularios
                         double precio = Convert.ToDouble(dgvBebidas.Rows[e.RowIndex].Cells["Precio"].Value);
                         int cantidad = Convert.ToInt32(dgvBebidas.Rows[e.RowIndex].Cells["Cantidad_Existente"].Value);
                         string opc_combotd = dgvBebidas.Rows[e.RowIndex].Cells["Tipo"].Value.ToString();
-                        string opc_combod = dgvBebidas.Rows[e.RowIndex].Cells["Descuentos"].Value.ToString();                                                                                   
+                        double opc_combod = Convert.ToDouble(dgvBebidas.Rows[e.RowIndex].Cells["Descuento"].Value);
 
-                        // Lógica para actualizar con el servicio
-                        MessageBox.Show($"Actualizando bebida {id} con nuevo nombre: {nombre}\nprecio: {precio}\ncantidad: {cantidad}\ntipo: {opc_combotd}\ndescuentos: {opc_combod}");
+                        // Mandar los datos al servicio para ser validados
+                        string respuesta = _serviciobebidas.Actualizar(id,nombre,precio,cantidad,opc_combotd,opc_combod);
+                        MessageBox.Show(respuesta);
 
                         // Restaurar botones y bloquear edición
                         dgvBebidas.ReadOnly = true;
@@ -234,6 +235,11 @@ namespace LimoncitoConRon._1._Presentaciones.Formularios
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
 
         }
