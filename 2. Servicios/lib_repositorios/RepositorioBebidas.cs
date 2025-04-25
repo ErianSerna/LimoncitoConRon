@@ -50,6 +50,12 @@ namespace LimoncitoConRon._2._Servicios.lib_repositorios
         //    return lista;
         //}//fin de metodo
 
+        // Metodo consultar bebida por id
+        //public BebidasModel ConsultarPorId(int Id)
+        //{
+
+        //}
+
         public DataTable ListarDataTable()
         {
             // Crear el dataTable que el adaptador va a llenar con los datos resultantes de la consulta

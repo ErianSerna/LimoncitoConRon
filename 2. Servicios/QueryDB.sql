@@ -356,3 +356,15 @@ BEGIN
 	SET Nombre = @Nombre, Precio = @Precio, Cantidad_Existente = @Cantidad_Existente, Id_Descuentos = @Id_Descuentos, Id_TipoBebidas = @Id_TipoBebidas
 	WHERE Id = @Id;
 END
+
+-- Procedimiento almacenado: sp_ConsultarPorId
+CREATE PROCEDURE sp_ConsultarPorId
+    @Id INT
+AS
+BEGIN
+    SELECT * FROM Bebidas WHERE Id = @Id
+END
+GO
+
+EXEC sp_ListarBebidas
+EXEC sp_ConsultarPorId 2
