@@ -211,6 +211,17 @@ namespace LimoncitoConRon._2._Servicios.lib_servicios
 
             return mensaje;
         }
+        
+        //método de buscar
+        public void Buscar (DataGridView dgvBebidas,string nombre)
+        {
+            DataTable dt = Repositorio.Buscar(nombre);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                dgvBebidas.DataSource = dt;
+            }
+        }
 
     }
 }

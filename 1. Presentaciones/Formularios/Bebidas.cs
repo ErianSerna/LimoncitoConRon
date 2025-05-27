@@ -1,4 +1,5 @@
-﻿using LimoncitoConRon._2._Servicios.lib_servicios;
+﻿using LimoncitoConRon._2._Servicios.lib_repositorios;
+using LimoncitoConRon._2._Servicios.lib_servicios;
 using LimoncitoConRon._3.Comunes.lib_entidades.Modelos;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace LimoncitoConRon._1._Presentaciones.Formularios
             this._serviciodescuentos = serviciodescuentos;
             llenarCBTipoBebidas(); // Inicializa el combobox de tipobebidas
             llenarCBDescuentos(); // Inicializa el combobox de descuentos
+
         }
 
         public DataSet listar()
@@ -241,7 +243,18 @@ namespace LimoncitoConRon._1._Presentaciones.Formularios
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            //Obtengo primero el texto de buscar
+            string textoBusqueda = txtBuscar.Text.Trim();
+            if (textoBusqueda.Length > 0)
+            {
+                //mandar los datos al servicio
 
+                _serviciobebidas.Buscar(dgvBebidas, textoBusqueda);
+            }
+            else
+            {
+                _serviciobebidas.Listar(dgvBebidas);
+            }
         }
 
         //private void CargarDatos()

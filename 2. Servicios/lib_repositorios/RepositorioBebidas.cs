@@ -203,22 +203,23 @@ namespace LimoncitoConRon._2._Servicios.lib_repositorios
             }
         }
 
-        //metodos de buscar bebidas
-        //public List<Bebidas> Buscar(string nombre)
-        //{
-        //    List<Bebidas> lista = new List<Bebidas>();
-        //    using (SqlCommand cmd = new SqlCommand("sp_BuscarBebida", _conexion))
-        //    {
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.Parameters.AddWithValue("@Nombre", nombre);
-        //        using (SqlDataReader reader = cmd.ExecuteReader())
-        //        {
-        //            while(reader.Read())
-        //            {
+        public DataTable Buscar(string nombre)
+        {
+            // Crear el dataTable que el adaptador va a llenar con los datos resultantes de la consulta
+            DataTable dt = new DataTable();
+            var consulta = "sp_ListarBebidasPorNombre";
+            using (SqlCommand cmd = new SqlCommand(consulta, _conexion))
+            {
+                cmd.CommandType = CommandType.StoredProcedure; // Especificar el tipo de comando
+                cmd.Parameters.AddWithValue("@Nombre", nombre);
+                using (SqlDataAdapter adaptador = new SqlDataAdapter(cmd))
+                {
+                    adaptador.Fill(dt);
+                }
+            }
 
-        //            }
-        //        }
-        //    }
-        //}
+            // Retornar el dataTable
+            return dt;
+        }
     }
 }
